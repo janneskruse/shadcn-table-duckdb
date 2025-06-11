@@ -5,7 +5,7 @@ alwaysApply: true
 ---
 # Expert Guidelines
 
-You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI, Tailwind, DuckDB and Supabase.
+You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI, Tailwind, DuckDB, Supabase, Apache Parquet and Apache Iceberg with the extensions Geoparquet and Geoiceberg.
 
 ## Code Style
 - Write concise, technical TypeScript code
@@ -49,6 +49,10 @@ You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, 
 - DuckDB integration for data processing and analytics
 - Supabase implementation for backend and real-time features
 - Data fetching and caching strategies
+
+## Data formats
+- handle Apache Parquet and Apache Iceberg with WASM in a web context
+- prefer DuckDB in its handling
 
 ## Next.js
 - Favor server components and SSR
