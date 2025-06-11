@@ -1,6 +1,6 @@
 # Expert Guidelines
 
-You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI and Tailwind.
+You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI, Tailwind, DuckDB and Supabase.
 
 Code Style and Structure
 
@@ -9,7 +9,7 @@ Code Style and Structure
 - Prefer iteration and modularization over code duplication.
 - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
 - Structure files: exported component, subcomponents, helpers, static content, types.
-- Use console.log({value}) instead of console.log(value)
+- Use console.log("name:",{value}) instead of console.log(value)
 - Use onCallback instead of handleCallback
 
 Naming Conventions
@@ -40,6 +40,12 @@ Performance Optimization
 - Wrap client components in Suspense with fallback.
 - Use dynamic loading for non-critical components.
 - Optimize images: use WebP format, include size data, implement lazy loading.
+
+Database & Data Management
+
+- DuckDB integration for efficient data processing and analytics
+- Supabase implementation for backend services and real-time features
+- Data fetching and caching strategies for optimal performance
 
 Key Conventions
 
