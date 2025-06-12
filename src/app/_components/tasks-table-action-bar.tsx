@@ -19,7 +19,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { exportTableToCSV } from "@/lib/export";
+import { exportTableToCSV } from "@/utils/data-table/export";
 import { deleteTasks, updateTasks } from "../_lib/actions";
 
 const actions = [

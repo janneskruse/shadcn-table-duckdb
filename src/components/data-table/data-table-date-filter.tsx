@@ -13,7 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
-import { formatDate } from "@/lib/format";
+import { formatDate } from "@/utils/format";
 
 type DateSelection = Date[] | DateRange;
 
@@ -96,7 +96,7 @@ export function DataTableDateFilter<TData>({
         column.setFilterValue(date.getTime());
       }
     },
-    [column, multiple],
+    [column, multiple]
   );
 
   const onReset = React.useCallback(
@@ -104,7 +104,7 @@ export function DataTableDateFilter<TData>({
       event.stopPropagation();
       column.setFilterValue(undefined);
     },
-    [column],
+    [column]
   );
 
   const hasValue = React.useMemo(() => {

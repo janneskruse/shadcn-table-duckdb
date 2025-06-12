@@ -1,13 +1,11 @@
+"use client";
 import type { SearchParams } from "@/types";
 import React, { Suspense } from "react";
 
 import { DataTableSkeleton } from "@/components/data-table/data-table-skeleton";
-import { Shell } from "@/components/shell";
-import { getValidFilters } from "@/lib/data-table";
 
 import { FeatureFlagsProvider } from "../hooks/feature-flags-provider";
-import { DuckDBTest } from "@/components/duckdb-test";
-import { DuckDBTable } from "@/components/duckdb-table";
+import { DuckDBDataTable } from "@/components/data-table/duckdb-data-table";
 
 interface IndexPageProps {
   searchParams: Promise<SearchParams>;
@@ -34,16 +32,18 @@ export default function Home() {
           />
         }
       >
-        <DuckDBTable
+        <DuckDBDataTable
           parquetPath="http://localhost:3000/data/Utah_arrowGeoms.parquet"
           title="Utah Arrow Geometries"
           defaultLimit={10}
+          onRowsDelete={async (rows) => {
+            console.log("Rows to delete:", rows);
+            return Promise.resolve();
+          }}
+          enableFiltering
+          enableSelection
         />
       </Suspense>
-      <div className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">DuckDB Test</h2>
-        <DuckDBTest />
-      </div>
     </FeatureFlagsProvider>
   );
 }

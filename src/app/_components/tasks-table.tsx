@@ -11,7 +11,7 @@ import { DataTableAdvancedToolbar } from "@/components/data-table/data-table-adv
 import { DataTableFilterList } from "@/components/data-table/data-table-filter-list";
 import { DataTableFilterMenu } from "@/components/data-table/data-table-filter-menu";
 import { DataTableSortList } from "@/components/data-table/data-table-sort-list";
-import { DataTableToolbar } from "@/components/data-table/data-table-toolbar";
+import { DataTableToolbar } from "@/components/data-table/data-table-toolbar-filter";
 import type {
   getEstimatedHoursRange,
   getTaskPriorityCounts,
@@ -30,7 +30,7 @@ interface TasksTableProps {
       Awaited<ReturnType<typeof getTasks>>,
       Awaited<ReturnType<typeof getTaskStatusCounts>>,
       Awaited<ReturnType<typeof getTaskPriorityCounts>>,
-      Awaited<ReturnType<typeof getEstimatedHoursRange>>,
+      Awaited<ReturnType<typeof getEstimatedHoursRange>>
     ]
   >;
 }
@@ -56,7 +56,7 @@ export function TasksTable({ promises }: TasksTableProps) {
         estimatedHoursRange,
         setRowAction,
       }),
-    [statusCounts, priorityCounts, estimatedHoursRange],
+    [statusCounts, priorityCounts, estimatedHoursRange]
   );
 
   const { table, shallow, debounceMs, throttleMs } = useDataTable({
