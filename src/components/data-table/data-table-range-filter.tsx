@@ -4,7 +4,7 @@ import type { Column } from "@tanstack/react-table";
 import * as React from "react";
 
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import type { ExtendedColumnFilter } from "@/types/data-table";
 
 interface DataTableRangeFilterProps<TData> extends React.ComponentProps<"div"> {
@@ -13,7 +13,7 @@ interface DataTableRangeFilterProps<TData> extends React.ComponentProps<"div"> {
   inputId: string;
   onFilterUpdate: (
     filterId: string,
-    updates: Partial<Omit<ExtendedColumnFilter<TData>, "filterId">>,
+    updates: Partial<Omit<ExtendedColumnFilter<TData>, "filterId">>
   ) => void;
 }
 
@@ -47,7 +47,7 @@ export function DataTableRangeFilter<TData>({
             maximumFractionDigits: 0,
           });
     },
-    [],
+    []
   );
 
   const value = React.useMemo(() => {
@@ -62,8 +62,8 @@ export function DataTableRangeFilter<TData>({
         ? filter.value
         : ["", ""];
       const otherValue = isMin
-        ? (currentValues[1] ?? "")
-        : (currentValues[0] ?? "");
+        ? currentValues[1] ?? ""
+        : currentValues[0] ?? "";
 
       if (
         value === "" ||
@@ -77,7 +77,7 @@ export function DataTableRangeFilter<TData>({
         });
       }
     },
-    [filter.filterId, filter.value, min, max, onFilterUpdate],
+    [filter.filterId, filter.value, min, max, onFilterUpdate]
   );
 
   return (

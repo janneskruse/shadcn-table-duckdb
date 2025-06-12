@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 interface DataTablePaginationProps<TData> extends React.ComponentProps<"div"> {
   table: Table<TData>;
@@ -31,7 +31,7 @@ export function DataTablePagination<TData>({
     <div
       className={cn(
         "flex w-full flex-col-reverse items-center justify-between gap-4 overflow-auto p-1 sm:flex-row sm:gap-8",
-        className,
+        className
       )}
       {...props}
     >

@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getCommonPinningStyles } from "@/lib/data-table";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 interface DataTableProps<TData> extends React.ComponentProps<"div"> {
   table: TanstackTable<TData>;
@@ -48,7 +48,7 @@ export function DataTable<TData>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext(),
+                          header.getContext()
                         )}
                   </TableHead>
                 ))}
@@ -71,7 +71,7 @@ export function DataTable<TData>({
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}

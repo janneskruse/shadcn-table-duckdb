@@ -6,7 +6,7 @@
 
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import { type TargetAndTransition, motion } from "motion/react";
 
 interface Dimensions extends TargetAndTransition {
@@ -52,8 +52,8 @@ function DynamicContainer({
 
       rafRef.current = requestAnimationFrame(() => {
         setDimensions({
-          width: width ? (entry?.contentRect?.width ?? "auto") : "auto",
-          height: height ? (entry?.contentRect?.height ?? "auto") : "auto",
+          width: width ? entry?.contentRect?.width ?? "auto" : "auto",
+          height: height ? entry?.contentRect?.height ?? "auto" : "auto",
         });
       });
     }
@@ -74,7 +74,7 @@ function DynamicContainer({
       height: height ? "max-content" : "auto",
       width: width ? "max-content" : "auto",
     }),
-    [height, width],
+    [height, width]
   );
 
   return (

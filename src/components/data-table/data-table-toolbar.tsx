@@ -10,7 +10,7 @@ import { DataTableSliderFilter } from "@/components/data-table/data-table-slider
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 
 interface DataTableToolbarProps<TData> extends React.ComponentProps<"div"> {
   table: Table<TData>;
@@ -26,7 +26,7 @@ export function DataTableToolbar<TData>({
 
   const columns = React.useMemo(
     () => table.getAllColumns().filter((column) => column.getCanFilter()),
-    [table],
+    [table]
   );
 
   const onReset = React.useCallback(() => {
@@ -39,7 +39,7 @@ export function DataTableToolbar<TData>({
       aria-orientation="horizontal"
       className={cn(
         "flex w-full items-start justify-between gap-2 p-1",
-        className,
+        className
       )}
       {...props}
     >

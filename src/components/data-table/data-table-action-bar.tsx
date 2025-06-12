@@ -7,7 +7,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import type { Table } from "@tanstack/react-table";
 import { Loader, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -66,7 +66,7 @@ function DataTableActionBar<TData>({
           transition={{ duration: 0.2, ease: "easeInOut" }}
           className={cn(
             "fixed inset-x-0 bottom-6 z-50 mx-auto flex w-fit flex-wrap items-center justify-center gap-2 rounded-md border bg-background p-2 text-foreground shadow-sm",
-            className,
+            className
           )}
           {...props}
         >
@@ -74,7 +74,7 @@ function DataTableActionBar<TData>({
         </motion.div>
       )}
     </AnimatePresence>,
-    container,
+    container
   );
 }
 
@@ -100,7 +100,7 @@ function DataTableActionBarAction({
       className={cn(
         "gap-1.5 border border-secondary bg-secondary/50 hover:bg-secondary/70 [&>svg]:size-3.5",
         size === "icon" ? "size-7" : "h-7",
-        className,
+        className
       )}
       disabled={disabled || isPending}
       {...props}

@@ -61,7 +61,7 @@ import { getDefaultFilterOperator, getFilterOperators } from "@/lib/data-table";
 import { formatDate } from "@/lib/format";
 import { generateId } from "@/lib/id";
 import { getFiltersStateParser } from "@/lib/parsers";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import type {
   ExtendedColumnFilter,
   FilterOperator,
@@ -110,7 +110,7 @@ export function DataTableFilterList<TData>({
         clearOnDefault: true,
         shallow,
         throttleMs,
-      }),
+      })
   );
   const debouncedSetFilters = useDebouncedCallback(setFilters, debounceMs);
 
@@ -119,7 +119,7 @@ export function DataTableFilterList<TData>({
     parseAsStringEnum(["and", "or"]).withDefault("and").withOptions({
       clearOnDefault: true,
       shallow,
-    }),
+    })
   );
 
   const onFilterAdd = React.useCallback(() => {
@@ -134,7 +134,7 @@ export function DataTableFilterList<TData>({
         value: "",
         variant: column.columnDef.meta?.variant ?? "text",
         operator: getDefaultFilterOperator(
-          column.columnDef.meta?.variant ?? "text",
+          column.columnDef.meta?.variant ?? "text"
         ),
         filterId: generateId({ length: 8 }),
       },
@@ -144,7 +144,7 @@ export function DataTableFilterList<TData>({
   const onFilterUpdate = React.useCallback(
     (
       filterId: string,
-      updates: Partial<Omit<ExtendedColumnFilter<TData>, "filterId">>,
+      updates: Partial<Omit<ExtendedColumnFilter<TData>, "filterId">>
     ) => {
       debouncedSetFilters((prevFilters) => {
         const updatedFilters = prevFilters.map((filter) => {
@@ -156,20 +156,20 @@ export function DataTableFilterList<TData>({
         return updatedFilters;
       });
     },
-    [debouncedSetFilters],
+    [debouncedSetFilters]
   );
 
   const onFilterRemove = React.useCallback(
     (filterId: string) => {
       const updatedFilters = filters.filter(
-        (filter) => filter.filterId !== filterId,
+        (filter) => filter.filterId !== filterId
       );
       void setFilters(updatedFilters);
       requestAnimationFrame(() => {
         addButtonRef.current?.focus();
       });
     },
-    [filters, setFilters],
+    [filters, setFilters]
   );
 
   const onFiltersReset = React.useCallback(() => {
@@ -220,7 +220,7 @@ export function DataTableFilterList<TData>({
         onFilterRemove(filters[filters.length - 1]?.filterId ?? "");
       }
     },
-    [filters, onFilterRemove],
+    [filters, onFilterRemove]
   );
 
   return (
@@ -258,7 +258,7 @@ export function DataTableFilterList<TData>({
               id={descriptionId}
               className={cn(
                 "text-muted-foreground text-sm",
-                filters.length > 0 && "sr-only",
+                filters.length > 0 && "sr-only"
               )}
             >
               {filters.length > 0
@@ -333,7 +333,7 @@ interface DataTableFilterItemProps<TData> {
   columns: Column<TData>[];
   onFilterUpdate: (
     filterId: string,
-    updates: Partial<Omit<ExtendedColumnFilter<TData>, "filterId">>,
+    updates: Partial<Omit<ExtendedColumnFilter<TData>, "filterId">>
   ) => void;
   onFilterRemove: (filterId: string) => void;
 }
@@ -387,7 +387,7 @@ function DataTableFilterItem<TData>({
       showOperatorSelector,
       showValueSelector,
       onFilterRemove,
-    ],
+    ]
   );
 
   return (
@@ -467,7 +467,7 @@ function DataTableFilterItem<TData>({
                           id: value as Extract<keyof TData, string>,
                           variant: column.columnDef.meta?.variant ?? "text",
                           operator: getDefaultFilterOperator(
-                            column.columnDef.meta?.variant ?? "text",
+                            column.columnDef.meta?.variant ?? "text"
                           ),
                           value: "",
                         });
@@ -481,7 +481,7 @@ function DataTableFilterItem<TData>({
                       <Check
                         className={cn(
                           "ml-auto",
-                          column.id === filter.id ? "opacity-100" : "opacity-0",
+                          column.id === filter.id ? "opacity-100" : "opacity-0"
                         )}
                       />
                     </CommandItem>
@@ -573,7 +573,7 @@ function onFilterInputRender<TData>({
   columnMeta?: ColumnMeta<TData, unknown>;
   onFilterUpdate: (
     filterId: string,
-    updates: Partial<Omit<ExtendedColumnFilter<TData>, "filterId">>,
+    updates: Partial<Omit<ExtendedColumnFilter<TData>, "filterId">>
   ) => void;
   showValueSelector: boolean;
   setShowValueSelector: (value: boolean) => void;
@@ -676,8 +676,8 @@ function onFilterInputRender<TData>({
           ? filter.value
           : []
         : typeof filter.value === "string"
-          ? filter.value
-          : undefined;
+        ? filter.value
+        : undefined;
 
       return (
         <Faceted
@@ -695,7 +695,9 @@ function onFilterInputRender<TData>({
             <Button
               id={inputId}
               aria-controls={inputListboxId}
-              aria-label={`${columnMeta?.label} filter value${multiple ? "s" : ""}`}
+              aria-label={`${columnMeta?.label} filter value${
+                multiple ? "s" : ""
+              }`}
               variant="outline"
               size="sm"
               className="w-full rounded font-normal"
@@ -749,11 +751,11 @@ function onFilterInputRender<TData>({
       const displayValue =
         filter.operator === "isBetween" && dateValue.length === 2
           ? `${formatDate(new Date(Number(dateValue[0])))} - ${formatDate(
-              new Date(Number(dateValue[1])),
+              new Date(Number(dateValue[1]))
             )}`
           : dateValue[0]
-            ? formatDate(new Date(Number(dateValue[0])))
-            : "Pick a date";
+          ? formatDate(new Date(Number(dateValue[0])))
+          : "Pick a date";
 
       return (
         <Popover open={showValueSelector} onOpenChange={setShowValueSelector}>
@@ -766,7 +768,7 @@ function onFilterInputRender<TData>({
               size="sm"
               className={cn(
                 "w-full justify-start rounded text-left font-normal",
-                !filter.value && "text-muted-foreground",
+                !filter.value && "text-muted-foreground"
               )}
             >
               <CalendarIcon />
