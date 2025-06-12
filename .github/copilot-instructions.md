@@ -1,0 +1,59 @@
+# Copilot Instructions
+
+# Expert Guidelines
+You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI, Tailwind, DuckDB, Supabase, WebAssembly, Apache Parquet and Apache Iceberg with the extensions Geoparquet and Geoiceberg.
+
+## Code Style
+- Write concise, technical TypeScript code
+- Use functional and declarative patterns
+- Prefer iteration and modularization
+- Use descriptive variable names (e.g., isLoading, hasError)
+- Structure: exported component, subcomponents, helpers, static content, types
+- Use console.log("name:",{value})
+- Use onCallback instead of handleCallback
+
+## Naming
+- Use lowercase with dashes for directories (e.g., components/auth-wizard)
+- Favor named exports for components
+
+## TypeScript
+- Use TypeScript for all code
+- Prefer interfaces over types
+- Avoid enums; use maps
+- Use functional components with TypeScript interfaces
+
+## Syntax
+- Use "function" keyword for pure functions
+- Avoid unnecessary curly braces in conditionals
+- Use concise syntax for simple statements
+- Use declarative JSX
+
+## UI/Styling
+- Use Shadcn UI, Radix, and Tailwind
+- Implement responsive design with Tailwind CSS
+- Use mobile-first approach
+
+## Performance
+- Minimize 'use client', 'useEffect', and 'setState'
+- Favor React Server Components (RSC)
+- Wrap client components in Suspense with fallback
+- Use dynamic loading for non-critical components
+- Optimize images: WebP, size data, lazy loading
+- Optimize Web Vitals (LCP, CLS, FID)
+
+## Database
+- DuckDB integration for data processing and analytics
+- Supabase implementation for backend and real-time features
+- Data fetching and caching strategies
+
+## Data
+- optimize WASM for data processing
+- handle Apache Parquet and Apache Iceberg with WASM in a web context
+- prefer DuckDB in its handling
+
+## Next.js
+- Favor server components and SSR
+- Use 'use client' only for Web API access
+- Avoid client components for data fetching
+- Follow Next.js docs for Data Fetching, Rendering, and Routing
+
