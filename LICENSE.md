@@ -1,6 +1,7 @@
 # MIT License
 
-Copyright (c) 2024 Sadman Sakib
+Copyright (c) 2025 Jannes Kruse - modified for DuckDB big data queries from
+Sadman Sakib (https://github.com/sadmann7/shadcn-table)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
