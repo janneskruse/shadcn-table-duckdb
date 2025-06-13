@@ -132,7 +132,14 @@ export function generateDynamicColumns(
           col.column_type.toLowerCase().includes("date") ||
           col.column_type.toLowerCase().includes("time")
         ) {
-          return value ? new Date(value).toLocaleDateString() : "";
+          if (
+            typeof value === "string" ||
+            typeof value === "number" ||
+            value instanceof Date
+          ) {
+            return value ? new Date(value).toLocaleDateString() : "";
+          }
+          return "";
         }
 
         if (typeof value === "object" && value !== null) {

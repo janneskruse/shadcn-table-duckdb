@@ -25,7 +25,7 @@ export function useFeatureFlags() {
   const context = React.useContext(FeatureFlagsContext);
   if (!context) {
     throw new Error(
-      "useFeatureFlags must be used within a FeatureFlagsProvider",
+      "useFeatureFlags must be used within a FeatureFlagsProvider"
     );
   }
   return context;
@@ -33,9 +33,13 @@ export function useFeatureFlags() {
 
 interface FeatureFlagsProviderProps {
   children: React.ReactNode;
+  enableAdvancedFilter?: boolean;
 }
 
-export function FeatureFlagsProvider({ children }: FeatureFlagsProviderProps) {
+export function FeatureFlagsProvider({
+  children,
+  enableAdvancedFilter = true,
+}: FeatureFlagsProviderProps) {
   const [filterFlag, setFilterFlag] = useQueryState<FilterFlag | null>(
     "filterFlag",
     {
@@ -51,63 +55,19 @@ export function FeatureFlagsProvider({ children }: FeatureFlagsProviderProps) {
       clearOnDefault: true,
       shallow: false,
       eq: (a, b) => (!a && !b) || a === b,
-    },
-  );
-
-  const onFilterFlagChange = React.useCallback(
-    (value: FilterFlag) => {
-      setFilterFlag(value);
-    },
-    [setFilterFlag],
+    }
   );
 
   const contextValue = React.useMemo<FeatureFlagsContextValue>(
     () => ({
       filterFlag,
-      enableAdvancedFilter:
-        filterFlag === "advancedFilters" || filterFlag === "commandFilters",
+      enableAdvancedFilter: enableAdvancedFilter,
     }),
-    [filterFlag],
+    [filterFlag]
   );
 
   return (
     <FeatureFlagsContext.Provider value={contextValue}>
-      <div className="w-full overflow-x-auto p-1">
-        <ToggleGroup
-          type="single"
-          variant="outline"
-          size="sm"
-          value={filterFlag}
-          onValueChange={onFilterFlagChange}
-          className="w-fit gap-0"
-        >
-          {flagConfig.featureFlags.map((flag) => (
-            <Tooltip key={flag.value} delayDuration={700}>
-              <ToggleGroupItem
-                value={flag.value}
-                className="whitespace-nowrap px-3 text-xs data-[state=on]:bg-accent/70 data-[state=on]:hover:bg-accent/90"
-                asChild
-              >
-                <TooltipTrigger>
-                  <flag.icon className="size-3.5 shrink-0" />
-                  {flag.label}
-                </TooltipTrigger>
-              </ToggleGroupItem>
-              <TooltipContent
-                align="start"
-                side="bottom"
-                sideOffset={6}
-                className="flex flex-col gap-1.5 border bg-background py-2 font-semibold text-foreground [&>span]:hidden"
-              >
-                <div>{flag.tooltipTitle}</div>
-                <p className="text-balance text-muted-foreground text-xs">
-                  {flag.tooltipDescription}
-                </p>
-              </TooltipContent>
-            </Tooltip>
-          ))}
-        </ToggleGroup>
-      </div>
       {children}
     </FeatureFlagsContext.Provider>
   );

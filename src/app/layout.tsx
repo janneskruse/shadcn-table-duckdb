@@ -1,15 +1,17 @@
+import { Suspense } from "react";
+import "@/styles/globals.css";
+
 import { SiteHeader } from "@/components/layouts/site-header";
 import { ThemeProvider } from "@/components/providers";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
+import { Toaster } from "@/components/ui/sonner";
+import { DuckDBProvider } from "@/hooks/duckdb-context";
+
+import { fontMono, fontSans } from "@/utils/fonts";
+import type { Metadata, Viewport } from "next";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/utils/utils";
 
-import "@/styles/globals.css";
-
-import type { Metadata, Viewport } from "next";
-
-import { Toaster } from "@/components/ui/sonner";
-import { fontMono, fontSans } from "@/utils/fonts";
 // import Script from "next/script";
 
 // export const metadata: Metadata = {
@@ -67,7 +69,15 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        {/* Preload critical WASM files to improve initial loading */}
+        <link
+          rel="preload"
+          href="/duckdb-wasm/duckdb-mvp.wasm"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -88,7 +98,12 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         >
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />
-            <main className="container flex-1 p-8">{children}</main>
+
+            <main className="container flex-1 p-8">
+              <Suspense fallback={<p>Loading app...</p>}>
+                <DuckDBProvider>{children}</DuckDBProvider>
+              </Suspense>
+            </main>
           </div>
           <TailwindIndicator />
         </ThemeProvider>

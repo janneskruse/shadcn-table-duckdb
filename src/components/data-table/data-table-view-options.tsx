@@ -35,7 +35,19 @@ export function DataTableViewOptions<TData>({
           (column) =>
             typeof column.accessorFn !== "undefined" && column.getCanHide()
         ),
-    [table]
+    [table, table.getAllColumns().length]
+  );
+
+  console.log(
+    "DataTableViewOptions",
+    columns,
+    table.getAllColumns(),
+    table
+      .getAllColumns()
+      .filter(
+        (column) =>
+          typeof column.accessorFn !== "undefined" && column.getCanHide()
+      )
   );
 
   return (

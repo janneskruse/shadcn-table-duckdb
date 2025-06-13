@@ -1,6 +1,6 @@
 # [Shadcn Table](https://tablecn.com)
 
-This is a shadcn table component with server-side sorting, filtering, and pagination. It is bootstrapped with `create-t3-app`.
+This is a shadcn table component with sorting, filtering, and pagination using duckdb in WASM to query parquet files..
 
 [![Shadcn Table](./public/images/screenshot.png)](https://tablecn.com)
 
@@ -13,14 +13,12 @@ See the [documentation](https://diceui.com/docs/components/data-table) to get st
 - **Framework:** [Next.js](https://nextjs.org)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com)
-- **Table package:** [TanStack/react-table](https://tanstack.com/table/latest)
-- **Database:** [Neon](https://neon.tech)
-- **ORM:** [Drizzle ORM](https://orm.drizzle.team)
+- **Database:** [DuckDB](https://duckdb.org) for querying parquet files
 - **Validation:** [Zod](https://zod.dev)
 
 ## Features
 
-- [x] Server-side pagination, sorting, and filtering
+- [x] DuckDB in WASM for querying parquet files
 - [x] Customizable columns
 - [x] Auto generated filters from column definitions
 - [x] Dynamic `Data-Table-Toolbar` with search, filters, and actions
@@ -75,6 +73,21 @@ See the [documentation](https://diceui.com/docs/components/data-table) to get st
 ## How do I deploy this?
 
 Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+## Update DuckDB WASM
+To update the DuckDB WASM bundles:
+```bash
+# download the main WASM files
+curl -L https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm -o duckdb-mvp.wasm
+curl -L https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/duckdb-eh.wasm -o duckdb-eh.wasm
+curl -L https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/duckdb-coi.wasm -o duckdb-coi.wasm
+
+# download worker files
+curl -L https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js -o duckdb-browser-mvp.worker.js
+curl -L https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js -o duckdb-browser-eh.worker.js
+curl -L https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/duckdb-browser-coi.worker.js -o duckdb-browser-coi.worker.js
+curl -L https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/duckdb-browser-coi.pthread.worker.js -o duckdb-browser-coi.pthread.worker.js
+```
 
 ## Credits
 

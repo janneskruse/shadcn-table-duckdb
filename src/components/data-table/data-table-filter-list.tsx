@@ -103,7 +103,7 @@ export function DataTableFilterList<TData>({
     return table
       .getAllColumns()
       .filter((column) => column.columnDef.enableColumnFilter);
-  }, [table]);
+  }, [table, table.getAllColumns().length]);
 
   const [filters, setFilters] = useQueryState(
     FILTERS_KEY,
